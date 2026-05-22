@@ -5,14 +5,14 @@ FINAL CHALLENGE! Fully type the Keyboard component
 3. Explictly type all variables inside of Keyboard
 */
 import type {JSX} from 'react'
-
 import { clsx } from "clsx"
+
 type KeyBoardProps = {
     alphabet : string,
     guessedLetters : string[],
     currentWord : string,
     isGameOver : boolean,
-    addGuessedLetter : string
+    addGuessedLetter : (letter : string) => void
 }
 
 export default function Keyboard({
@@ -22,11 +22,11 @@ export default function Keyboard({
                                      isGameOver,
                                      addGuessedLetter
                                  }: KeyBoardProps) : JSX.Element {
-    const keyboardElements = alphabet.split("").map(letter => {
-        const isGuessed = guessedLetters.includes(letter)
-        const isCorrect = isGuessed && currentWord.includes(letter)
-        const isWrong = isGuessed && !currentWord.includes(letter)
-        const className = clsx({
+    const keyboardElements : JSX.Element[] = alphabet.split("").map((letter : string):JSX.Element => {
+        const isGuessed : boolean = guessedLetters.includes(letter)
+        const isCorrect : boolean = isGuessed && currentWord.includes(letter)
+        const isWrong:boolean = isGuessed && !currentWord.includes(letter)
+        const className:string = clsx({
             correct: isCorrect,
             wrong: isWrong
         })
